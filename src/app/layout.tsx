@@ -25,7 +25,7 @@ function NavbarClient() {
   }
 
   return (
-    <nav className="flex items-center gap-6 text-sm font-medium">
+    <nav className="flex items-center justify-end gap-6 text-sm font-medium">
       <Link href="/" className={navClass("/")}>
         Home
       </Link>
