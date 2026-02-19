@@ -54,57 +54,69 @@ export default function CartPage() {
               {items.map((it) => (
                 <div
                   key={it.id}
-                  className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm"
+                  className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm"
                 >
-                  <div className="relative h-16 w-16 overflow-hidden rounded-xl bg-gray-50">
-                    <Image
-                      src={it.thumbnail}
-                      alt={it.title}
-                      fill
-                      className="object-contain p-2"
-                      sizes="64px"
-                    />
-                  </div>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    {/* Thumbnail */}
+                    <div className="flex items-center gap-3">
+                      <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-gray-50">
+                        <Image
+                          src={it.thumbnail}
+                          alt={it.title}
+                          fill
+                          className="object-contain p-2"
+                          sizes="64px"
+                        />
+                      </div>
 
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-gray-900">
-                      {it.title}
-                    </p>
-                    <p className="text-xs text-gray-500">{it.category}</p>
-                    <p className="mt-1 text-sm font-bold text-[#03AC0E]">
-                      ${it.price}
-                    </p>
-                  </div>
+                      {/* Title */}
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-semibold text-gray-900">
+                          {it.title}
+                        </p>
+                        <p className="text-xs text-gray-500">{it.category}</p>
+                        <p className="mt-1 text-sm font-bold text-[#03AC0E]">
+                          ${it.price}
+                        </p>
+                      </div>
+                    </div>
 
-                  {/* qty */}
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => dec(it.id)}
-                      className="h-9 w-9 rounded-lg border border-gray-600 text-[#03AC0E] bg-white hover:bg-gray-50"
-                    >
-                      −
-                    </button>
-                    <span className="w-8 text-center text-sm font-semibold text-[#03AC0E]">
-                      {it.qty}
-                    </span>
-                    <button
-                      onClick={() => inc(it.id)}
-                      className="h-9 w-9 rounded-lg border border-gray-600 text-[#03AC0E] bg-white hover:bg-gray-50"
-                    >
-                      +
-                    </button>
-                  </div>
+                    {/* Right controls */}
+                    <div className="sm:ml-auto flex items-center justify-between gap-3">
+                      {/* Qty */}
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => dec(it.id)}
+                          className="h-9 w-9 rounded-lg border border-gray-600 text-[#03AC0E] bg-white hover:bg-gray-50"
+                          aria-label="Decrease quantity"
+                        >
+                          −
+                        </button>
+                        <span className="w-8 text-center text-sm text-[#03AC0E] font-semibold">
+                          {it.qty}
+                        </span>
+                        <button
+                          onClick={() => inc(it.id)}
+                          className="h-9 w-9 rounded-lg border border-gray-600 text-[#03AC0E] bg-white hover:bg-gray-50"
+                          aria-label="Increase quantity"
+                        >
+                          +
+                        </button>
+                      </div>
 
-                  <div className="text-right">
-                    <p className="text-sm font-semibold text-gray-900">
-                      ${(it.price * it.qty).toFixed(2)}
-                    </p>
-                    <button
-                      onClick={() => remove(it.id)}
-                      className="mt-2 text-xs font-semibold text-red-600 hover:text-red-700"
-                    >
-                      Remove
-                    </button>
+                      {/* Price + Remove */}
+                      <div className="text-right">
+                        <p className="text-sm font-semibold text-gray-900">
+                          ${(it.price * it.qty).toFixed(2)}
+                        </p>
+                        <button
+                          onClick={() => remove(it.id)}
+                          className="mt-1 text-xs font-semibold text-red-600 hover:text-red-700"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
